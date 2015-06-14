@@ -55,6 +55,7 @@
     <Compile Include="UserControlView.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="ViewRegistration.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Gacho.MvpVm.Core.Net40\Gacho.MvpVm.Core.Net40.csproj">

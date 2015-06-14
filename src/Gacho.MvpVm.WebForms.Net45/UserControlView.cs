@@ -8,14 +8,13 @@ using System.Web.UI;
 
 namespace Gacho.MvpVm.WebForms
 {
-    public abstract class UserControlView<TModel> : UserControl, IView<TModel>
+    public abstract class UserControlView<TModel, TPresenter> : UserControl, IView<TModel, TPresenter>
         where TModel : class, IViewModel, new()
+        where TPresenter : class, IPresenter<TModel>
     {
         private TModel model;
 
-        private NotifyPropertyChangedEventMapper notifyPropertyChangedEventMapper;
-
-        public virtual TModel Model
+        protected virtual TModel Model
         {
             get
             {
@@ -28,7 +27,11 @@ namespace Gacho.MvpVm.WebForms
             }
         }
 
-        public abstract IPresenter<TModel> Presenter { get; }
+        IViewModel IView.Model { get { return this.Model; } }
+
+        TModel IView<TModel, TPresenter>.Model { get { return this.Model; } }
+
+        public abstract TPresenter Presenter { get; }
 
         protected override void FrameworkInitialize()
         {
@@ -38,8 +41,6 @@ namespace Gacho.MvpVm.WebForms
             {
                 throw new InvalidOperationException("ViewModel cannot be null.");
             }
-
-            this.notifyPropertyChangedEventMapper = new NotifyPropertyChangedEventMapper(this.model, this);
         }
 
         protected override void OnInit(EventArgs e)
@@ -66,10 +67,7 @@ namespace Gacho.MvpVm.WebForms
         protected override void OnUnload(EventArgs e)
         {
             base.OnUnload(e);
-            if (this.notifyPropertyChangedEventMapper != null)
-            {
-                this.notifyPropertyChangedEventMapper.Dispose();
-            }
+            this.Presenter.Dispose();
         }
 
         protected virtual TModel CreateViewModelInstance()

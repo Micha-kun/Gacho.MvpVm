@@ -8,14 +8,13 @@ using System.Web.UI;
 
 namespace Gacho.MvpVm.WebForms
 {
-    public abstract class PageView<TModel> : Page, IView<TModel>
+    public abstract class PageView<TModel, TPresenter> : Page, IView<TModel, TPresenter>
         where TModel : class, IViewModel, new()
+        where TPresenter : class, IPresenter<TModel>
     {
-        private NotifyPropertyChangedEventMapper notifyPropertyChangedEventMapper;
-
         private TModel model;
 
-        public virtual TModel Model
+        protected virtual TModel Model
         {
             get
             {
@@ -28,7 +27,11 @@ namespace Gacho.MvpVm.WebForms
             }
         }
 
-        public abstract IPresenter<TModel> Presenter { get; }
+        IViewModel IView.Model { get { return this.Model; } }
+
+        TModel IView<TModel,TPresenter>.Model { get { return this.Model; } }
+
+        public abstract TPresenter Presenter { get; }
 
         protected override void RaisePostBackEvent(IPostBackEventHandler sourceControl, string eventArgument)
         {
@@ -54,8 +57,6 @@ namespace Gacho.MvpVm.WebForms
             {
                 throw new InvalidOperationException("ViewModel cannot be null.");
             }
-
-            this.notifyPropertyChangedEventMapper = new NotifyPropertyChangedEventMapper(this.model, this);
         }
 
         protected override void OnInit(EventArgs e)
@@ -82,11 +83,6 @@ namespace Gacho.MvpVm.WebForms
         protected override void OnUnload(EventArgs e)
         {
             base.OnUnload(e);
-            if (this.notifyPropertyChangedEventMapper != null)
-            {
-                this.notifyPropertyChangedEventMapper.Dispose();
-            }
-
             this.Presenter.Dispose();
         }
     }

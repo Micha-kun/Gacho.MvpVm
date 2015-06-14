@@ -7,9 +7,17 @@ using System.Web.UI;
 
 namespace Gacho.MvpVm.WebForms
 {
-    public interface IView<out TModel> : INamingContainer
+    public interface IView : INamingContainer
+    {
+        IViewModel Model { get; }
+    }
+
+    public interface IView<TModel, TPresenter> : IView
         where TModel : class, IViewModel
+        where TPresenter : class, IPresenter<TModel>
     {
         TModel Model { get; }
+
+        TPresenter Presenter { get; }
     }
 }
