@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{FDACF60C-FB2C-4E31-BF09-BFD95E10BC01}</ProjectGuid>
+    <ProjectGuid>{874CFEB5-8D92-4DBE-908E-9CC7E719C86F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Gacho.MvpVm.WebForms</RootNamespace>
-    <AssemblyName>Gacho.MvpVm.WebForms</AssemblyName>
+    <RootNamespace>Gacho.MvpVm.Console</RootNamespace>
+    <AssemblyName>Gacho.MvpVm.Console</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -33,7 +33,6 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -41,14 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Gacho.MvpVm.Core\Gacho.MvpVm.Core.csproj">
-      <Project>{3e8bdebd-c9c9-49e6-8254-c073f2db858e}</Project>
-      <Name>Gacho.MvpVm.Core</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
