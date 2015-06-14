@@ -30,6 +30,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gacho.MvpVm.Console.Tests", "tests\Gacho.MvpVm.Console.Tests\Gacho.MvpVm.Console.Tests.csproj", "{36A3D752-F1DB-46FB-B687-F7DC5F6E85A6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FAKE", "FAKE", "{2FA6BE04-D2B9-4E00-BDF5-59AB4CEDDA3D}"
+	ProjectSection(SolutionItems) = preProject
+		build.bat = build.bat
+		build.fsx = build.fsx
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
