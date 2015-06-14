@@ -17,7 +17,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gacho.MvpVm.Core.Net40", "s
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gacho.MvpVm.Core.Tests", "tests\Gacho.MvpVm.Core.Tests\Gacho.MvpVm.Core.Tests.csproj", "{44A48985-C644-4118-A90F-3840EFA04BE8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gacho.MvpVm.WebForms.Net40", "src\Gacho.MvpVm.WebForms.Net40\Gacho.MvpVm.WebForms.Net40.csproj", "{FDACF60C-FB2C-4E31-BF09-BFD95E10BC01}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gacho.MvpVm.WebForms.Net45", "src\Gacho.MvpVm.WebForms.Net45\Gacho.MvpVm.WebForms.Net45.csproj", "{FDACF60C-FB2C-4E31-BF09-BFD95E10BC01}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gacho.MvpVm.WebForms.Tests", "tests\Gacho.MvpVm.WebForms.Tests\Gacho.MvpVm.WebForms.Tests.csproj", "{6F28D510-A4F0-471F-BF38-776099BDF019}"
 EndProject
