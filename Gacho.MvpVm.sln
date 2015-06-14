@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gacho.MvpVm.Core", "src\Gac
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gacho.MvpVm.Core.Tests", "tests\Gacho.MvpVm.Core.Tests\Gacho.MvpVm.Core.Tests.csproj", "{44A48985-C644-4118-A90F-3840EFA04BE8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gacho.MvpVm.WebForms", "src\Gacho.MvpVm.WebForms\Gacho.MvpVm.WebForms.csproj", "{FDACF60C-FB2C-4E31-BF09-BFD95E10BC01}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,10 @@ Global
 		{44A48985-C644-4118-A90F-3840EFA04BE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{44A48985-C644-4118-A90F-3840EFA04BE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{44A48985-C644-4118-A90F-3840EFA04BE8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FDACF60C-FB2C-4E31-BF09-BFD95E10BC01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDACF60C-FB2C-4E31-BF09-BFD95E10BC01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDACF60C-FB2C-4E31-BF09-BFD95E10BC01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDACF60C-FB2C-4E31-BF09-BFD95E10BC01}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -38,5 +44,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{3E8BDEBD-C9C9-49E6-8254-C073F2DB858E} = {5DC9445B-8CD0-4D1F-B6FF-AB54B57EAA22}
 		{44A48985-C644-4118-A90F-3840EFA04BE8} = {03AA5BD6-4F90-4088-B4CA-14F3B9AB0B2C}
+		{FDACF60C-FB2C-4E31-BF09-BFD95E10BC01} = {5DC9445B-8CD0-4D1F-B6FF-AB54B57EAA22}
 	EndGlobalSection
 EndGlobal
