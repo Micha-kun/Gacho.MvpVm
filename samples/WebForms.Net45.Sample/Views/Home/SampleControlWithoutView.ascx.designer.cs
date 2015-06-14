@@ -10,15 +10,15 @@
 namespace WebForms.Net45.Sample.Views.Home {
     
     
-    public partial class View {
+    public partial class SampleControlWithoutView {
         
         /// <summary>
-        /// Element control.
+        /// Test control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Element;
+        protected global::System.Web.UI.WebControls.Literal Test;
     }
 }

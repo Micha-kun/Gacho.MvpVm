@@ -11,6 +11,23 @@ namespace Gacho.MvpVm.WebForms
 {
     public static class ViewRegistration
     {
+        public static TModel FindModel<TModel>(this Control control)
+            where TModel : class, IViewModel
+        {
+            while (control != null)
+            {
+                var view = control as IView;
+                if (view != null && view.ViewModel is TModel)
+                {
+                    return (TModel)view.ViewModel;
+                }
+
+                control = control.NamingContainer;
+            }
+
+            return null;
+        }
+
         public static IViewModel FindModel(this Control control)
         {
             while (control != null)
@@ -33,6 +50,20 @@ namespace Gacho.MvpVm.WebForms
             if (!HttpContext.Current.Items.Contains(key))
             {
                 var model = control.FindModel();
+                if (model != null)
+                {
+                    var notifyPropertyChangedEventMapper = new NotifyPropertyChangedEventMapper(model, control);
+                    HttpContext.Current.Items[key] = notifyPropertyChangedEventMapper;
+                }
+            }
+        }
+        public static void RegisterToViewModel<TModel>(this Control control)
+            where TModel : class, IViewModel
+        {
+            var key = control.UniqueID + "_NotifyPropertyChangedEventMapper";
+            if (!HttpContext.Current.Items.Contains(key))
+            {
+                var model = control.FindModel<TModel>();
                 if (model != null)
                 {
                     var notifyPropertyChangedEventMapper = new NotifyPropertyChangedEventMapper(model, control);
