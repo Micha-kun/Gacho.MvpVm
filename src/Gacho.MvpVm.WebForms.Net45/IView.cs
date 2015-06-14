@@ -9,7 +9,7 @@ namespace Gacho.MvpVm.WebForms
 {
     public interface IView : INamingContainer
     {
-        IViewModel Model { get; }
+        IViewModel ViewModel { get; }
     }
 
     public interface IView<TModel, TPresenter> : IView

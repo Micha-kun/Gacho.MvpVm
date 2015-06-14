@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace Gacho.MvpVm.Core
 {
-    public abstract class PresenterBase<TModel> : IPresenter<TModel>
+    public abstract class Presenter<TModel> : IPresenter<TModel>
        where TModel : class, IViewModel
     {
         private TModel model;
 
         private NotifyPropertyChangedEventMapper notifyPropertyChangedEventMapper;
 
-        ~PresenterBase()
+        ~Presenter()
         {
             this.Dispose(false);
         }

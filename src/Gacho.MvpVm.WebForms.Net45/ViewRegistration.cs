@@ -18,7 +18,7 @@ namespace Gacho.MvpVm.WebForms
                 var view = control as IView;
                 if (view != null)
                 {
-                    return view.Model;
+                    return view.ViewModel;
                 }
 
                 control = control.NamingContainer;

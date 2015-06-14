@@ -14,6 +14,8 @@ namespace Gacho.MvpVm.WebForms
     {
         private TModel model;
 
+        private TPresenter presenter;
+
         protected virtual TModel Model
         {
             get
@@ -27,11 +29,24 @@ namespace Gacho.MvpVm.WebForms
             }
         }
 
-        IViewModel IView.Model { get { return this.Model; } }
+        IViewModel IView.ViewModel { get { return this.Model; } }
 
         TModel IView<TModel, TPresenter>.Model { get { return this.Model; } }
 
-        public abstract TPresenter Presenter { get; }
+        public TPresenter Presenter
+        {
+            get
+            {
+                if (this.presenter == null)
+                {
+                    this.presenter = BuildPresenter();
+                }
+
+                return this.presenter;
+            }
+        }
+
+        protected abstract TPresenter BuildPresenter();
 
         protected override void FrameworkInitialize()
         {
@@ -56,7 +71,7 @@ namespace Gacho.MvpVm.WebForms
                 }
                 else
                 {
-                    this.Presenter.InitializeAsync(this.Model).RunSynchronously();
+                    this.Presenter.InitializeAsync(this.Model).Wait();
                 }
             }
         }
