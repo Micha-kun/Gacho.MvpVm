@@ -1,6 +1,7 @@
 ﻿using Gacho.MvpVm.Core;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Web.Routing;
@@ -8,30 +9,36 @@ using System.Web.UI;
 
 namespace Gacho.MvpVm.WebForms
 {
-    public abstract class PageView<TModel, TPresenter> : Page, IView<TModel, TPresenter>
-        where TModel : class, IViewModel, new()
-        where TPresenter : class, IPresenter<TModel>
+    public abstract class PageView<TModel> : Page, IView<TModel>
+         where TModel : class, INotifyPropertyChanged, new()
     {
         private TModel model;
 
-        private TPresenter presenter;
-
-        protected virtual TModel Model
+        public virtual TModel Model
         {
             get
             {
                 if (this.model == null)
                 {
-                    throw new InvalidOperationException("ViewModel cannot be null.");
+                    throw new InvalidOperationException("Model cannot be null.");
                 }
 
                 return this.model;
             }
+
+            set
+            {
+                this.model = value;
+                this.RegisterToViewModel();
+            }
         }
+    }
 
-        IViewModel IView.ViewModel { get { return this.Model; } }
-
-        TModel IView<TModel,TPresenter>.Model { get { return this.Model; } }
+    public abstract class PageView<TModel, TPresenter> : PageView<TModel>, IView<TModel, TPresenter>
+        where TModel : class, IViewModel, new()
+        where TPresenter : class, IPresenter<TModel>
+    {
+        private TPresenter presenter;
 
         public TPresenter Presenter
         {
@@ -48,51 +55,28 @@ namespace Gacho.MvpVm.WebForms
 
         protected abstract TPresenter BuildPresenter();
 
-        protected override void RaisePostBackEvent(IPostBackEventHandler sourceControl, string eventArgument)
+        protected virtual TModel CreateViewModelInstance()
         {
-            if (!this.IsPageRedirecting())
-            {
-                base.RaisePostBackEvent(sourceControl, eventArgument);
-            }
-        }
-
-        protected override void Render(HtmlTextWriter writer)
-        {
-            if (!this.IsPageRedirecting())
-            {
-                base.Render(writer);
-            }
+            return new TModel();
         }
 
         protected override void FrameworkInitialize()
         {
             base.FrameworkInitialize();
-            this.model = this.CreateViewModelInstance();
-            if (this.model == null)
-            {
-                throw new InvalidOperationException("ViewModel cannot be null.");
-            }
+            this.Model = this.CreateViewModelInstance();
         }
 
         protected override void OnInit(EventArgs e)
         {
             base.OnInit(e);
-            if (!this.IsPageRedirecting())
+            if (this.Page.IsAsync)
             {
-                if (this.Page.IsAsync)
-                {
-                    this.RegisterAsyncTask(new PageAsyncTask(() => this.Presenter.InitializeAsync(this.Model)));
-                }
-                else
-                {
-                    this.Presenter.InitializeAsync(this.Model).Wait();
-                }
+                this.RegisterAsyncTask(new PageAsyncTask(() => this.Presenter.InitializeAsync(this.Model)));
             }
-        }
-
-        protected virtual TModel CreateViewModelInstance()
-        {
-            return new TModel();
+            else
+            {
+                this.Presenter.InitializeAsync(this.Model).Wait();
+            }
         }
 
         protected override void OnUnload(EventArgs e)

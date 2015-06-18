@@ -20,5 +20,14 @@ namespace WebForms.Net45.Sample.Views.Home {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox Element;
+        
+        /// <summary>
+        /// NoViewCtrl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::WebForms.Net45.Sample.Views.Home.SampleControlWithoutView NoViewCtrl;
     }
 }

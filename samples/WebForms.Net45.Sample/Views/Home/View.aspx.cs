@@ -21,5 +21,10 @@ namespace WebForms.Net45.Sample.Views.Home
         {
             return new HomePresenter();
         }
+
+        protected void NoViewCtrl_Init(object sender, EventArgs e)
+        {
+            NoViewCtrl.Model = this.Model;
+        }
     }
 }

@@ -1,23 +1,25 @@
 ﻿using Gacho.MvpVm.Core;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Web.UI;
 
 namespace Gacho.MvpVm.WebForms
 {
-    public interface IView : INamingContainer
+    public interface IView<TModel>
+        where TModel : class, INotifyPropertyChanged
     {
-        IViewModel ViewModel { get; }
+        string UniqueID { get; }
+
+        TModel Model { get; }
     }
 
-    public interface IView<TModel, TPresenter> : IView
+    public interface IView<TModel, TPresenter> : IView<TModel>, INamingContainer
         where TModel : class, IViewModel
         where TPresenter : class, IPresenter<TModel>
     {
-        TModel Model { get; }
-
         TPresenter Presenter { get; }
     }
 }

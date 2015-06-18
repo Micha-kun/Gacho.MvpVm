@@ -7,6 +7,6 @@
         <p>Page:</p>
         <asp:TextBox ID="Element" runat="server" OnTextChanged="TextBox_TextChanged" AutoPostBack="True" />
         <p>Textbox value is <%= this.Model.Text %></p>
-        <ctrl:SampleControlWithoutView runat="server" />
+        <ctrl:SampleControlWithoutView runat="server" ID="NoViewCtrl" OnInit="NoViewCtrl_Init" />
     </div>
 </asp:Content>

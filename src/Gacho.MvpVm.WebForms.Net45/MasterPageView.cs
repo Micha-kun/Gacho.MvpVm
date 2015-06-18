@@ -1,6 +1,7 @@
 ﻿using Gacho.MvpVm.Core;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,30 +9,36 @@ using System.Web.UI;
 
 namespace Gacho.MvpVm.WebForms
 {
-    public abstract class MasterPageView<TModel, TPresenter> : MasterPage, IView<TModel, TPresenter>
-        where TModel : class, IViewModel, new()
-        where TPresenter : class, IPresenter<TModel>
+    public abstract class MasterPageView<TModel> : MasterPage, IView<TModel>
+         where TModel : class, INotifyPropertyChanged, new()
     {
         private TModel model;
 
-        private TPresenter presenter;
-
-        protected virtual TModel Model
+        public virtual TModel Model
         {
             get
             {
                 if (this.model == null)
                 {
-                    throw new InvalidOperationException("ViewModel cannot be null.");
+                    throw new InvalidOperationException("Model cannot be null.");
                 }
 
                 return this.model;
             }
+
+            set
+            {
+                this.model = value;
+                this.RegisterToViewModel();
+            }
         }
+    }
 
-        IViewModel IView.ViewModel { get { return this.Model; } }
-
-        TModel IView<TModel, TPresenter>.Model { get { return this.Model; } }
+    public abstract class MasterPageView<TModel, TPresenter> : MasterPageView<TModel>, IView<TModel, TPresenter>
+        where TModel : class, IViewModel, new()
+        where TPresenter : class, IPresenter<TModel>
+    {
+        private TPresenter presenter;
 
         public TPresenter Presenter
         {
@@ -48,39 +55,27 @@ namespace Gacho.MvpVm.WebForms
 
         protected abstract TPresenter BuildPresenter();
 
+        protected virtual TModel CreateViewModelInstance()
+        {
+            return new TModel();
+        }
+
         protected override void FrameworkInitialize()
         {
             base.FrameworkInitialize();
-            this.model = this.CreateViewModelInstance();
-            if (this.model == null)
-            {
-                throw new InvalidOperationException("ViewModel cannot be null.");
-            }
-
-            this.RegisterToViewModel();
+            this.Model = this.CreateViewModelInstance();
         }
 
         protected override void OnInit(EventArgs e)
         {
             base.OnInit(e);
-            if (!this.IsPageRedirecting())
+            if (this.Page.IsAsync)
             {
-                if (this.Page.IsAsync)
-                {
-                    this.Page.RegisterAsyncTask(new PageAsyncTask(() => this.Presenter.InitializeAsync(this.Model)));
-                }
-                else
-                {
-                    this.Presenter.InitializeAsync(this.Model).Wait();
-                }
+                this.Page.RegisterAsyncTask(new PageAsyncTask(() => this.Presenter.InitializeAsync(this.Model)));
             }
-        }
-
-        protected override void Render(HtmlTextWriter writer)
-        {
-            if (!this.IsPageRedirecting())
+            else
             {
-                base.Render(writer);
+                this.Presenter.InitializeAsync(this.Model).Wait();
             }
         }
 
@@ -88,11 +83,6 @@ namespace Gacho.MvpVm.WebForms
         {
             base.OnUnload(e);
             this.Presenter.Dispose();
-        }
-
-        protected virtual TModel CreateViewModelInstance()
-        {
-            return new TModel();
         }
     }
 }
