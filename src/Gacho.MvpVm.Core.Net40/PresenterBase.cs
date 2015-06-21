@@ -47,16 +47,6 @@ namespace Gacho.MvpVm.Core
         }
 
         protected abstract void Initialize(TModel model);
-
-        IAsyncResult IPresenter<TModel>.BeginInitialize(TModel model)
-        {
-            ModelInitializer<TModel> del = Initialize;
-            return del.BeginInvoke(model,null,null);
-        }
-
-        void IPresenter<TModel>.EndInitialize(IAsyncResult result)
-        {
-        }
 #endif
 
         public void Dispose()

@@ -12,8 +12,9 @@ using System.Web;
 
 namespace Gacho.MvpVm.WebForms
 {
-    public abstract class PageView<TModel> : Page, IView<TModel>
-         where TModel : class, INotifyPropertyChanged, new()
+    public abstract class PageView<TModel, TPresenter> : Page, IView<TModel, TPresenter>
+        where TModel : class, IViewModel, new()
+        where TPresenter : class, IPresenter<TModel>
     {
         private TModel model;
 
@@ -57,12 +58,7 @@ namespace Gacho.MvpVm.WebForms
             }
         }
 #endif
-    }
 
-    public abstract class PageView<TModel, TPresenter> : PageView<TModel>, IView<TModel, TPresenter>, INamingContainer
-        where TModel : class, IViewModel, new()
-        where TPresenter : class, IPresenter<TModel>
-    {
         private TPresenter presenter;
 
         public TPresenter Presenter
@@ -110,7 +106,7 @@ namespace Gacho.MvpVm.WebForms
             base.OnInit(e);
             if (this.Page.IsAsync)
             {
-                this.Page.RegisterAsyncTask(new PageAsyncTask(new BeginEventHandler(this.BeginInitializeModel), new EndEventHandler(this.EndInitializeModel), new EndEventHandler(this.TimeoutInitializeModel), null, true));
+                this.Page.RegisterAsyncTask(new PageAsyncTask(new BeginEventHandler(this.BeginInitializeModel), new EndEventHandler(this.EndInitializeModel), null, null, true));
             }
             else
             {
@@ -127,17 +123,13 @@ namespace Gacho.MvpVm.WebForms
         {
             ((Task)ar).Wait();
         }
-
-        private void TimeoutInitializeModel(IAsyncResult ar)
-        {
-        }
 #else
         protected override void OnInit(EventArgs e)
         {
             base.OnInit(e);
             if (this.Page.IsAsync)
             {
-                this.Page.RegisterAsyncTask(new PageAsyncTask(new BeginEventHandler(this.BeginInitializeModel), new EndEventHandler(this.EndInitializeModel), new EndEventHandler(this.TimeoutInitializeModel), null, true));
+                this.Page.RegisterAsyncTask(new PageAsyncTask(new BeginEventHandler(this.BeginInitializeModel), new EndEventHandler(this.EndInitializeModel), null, null, true));
             }
             else
             {
@@ -147,15 +139,14 @@ namespace Gacho.MvpVm.WebForms
 
         private IAsyncResult BeginInitializeModel(object sender, EventArgs e, AsyncCallback cb, object extraData)
         {
-            return this.Presenter.BeginInitialize(this.Model);
+            var del = new InitializeDelegate<TModel>(this.Presenter.Initialize);
+            return del.BeginInvoke(this.Model, null, null);
         }
 
         private void EndInitializeModel(IAsyncResult ar)
         {
-        }
-
-        private void TimeoutInitializeModel(IAsyncResult ar)
-        {
+            var del = (InitializeDelegate<TModel>)ar.AsyncState;
+            del.EndInvoke(ar);
         }
 #endif
 

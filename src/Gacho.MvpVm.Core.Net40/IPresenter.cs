@@ -6,6 +6,11 @@ using System.Threading.Tasks;
 #endif
 namespace Gacho.MvpVm.Core
 {
+#if NET20
+    public delegate void InitializeDelegate<TModel>(TModel model)
+        where TModel : class, IViewModel;
+#endif
+
     public interface IPresenter<in TModel> : IDisposable
         where TModel : class, IViewModel
     {
@@ -13,10 +18,6 @@ namespace Gacho.MvpVm.Core
         Task InitializeAsync(TModel model);
 #elif NET20
         void Initialize(TModel model);
-
-        IAsyncResult BeginInitialize(TModel model);
-
-        void EndInitialize(IAsyncResult result);
 #endif
     }
 }
