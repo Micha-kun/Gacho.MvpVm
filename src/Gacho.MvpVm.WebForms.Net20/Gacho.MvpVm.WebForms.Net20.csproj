@@ -17,7 +17,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;NET20</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -25,17 +25,39 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <DefineConstants>TRACE;NET20</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Gacho.MvpVm.WebForms.Net45\MasterPageView.cs">
+      <Link>MasterPageView.cs</Link>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="..\Gacho.MvpVm.WebForms.Net45\PageView.cs">
+      <Link>PageView.cs</Link>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="..\Gacho.MvpVm.WebForms.Net45\UserControlView.cs">
+      <Link>UserControlView.cs</Link>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="..\Gacho.MvpVm.WebForms.Net45\ViewModelRegistration.cs">
+      <Link>ViewModelRegistration.cs</Link>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Gacho.MvpVm.Core.Net20\Gacho.MvpVm.Core.Net20.csproj">
+      <Project>{e37b910c-961b-405c-acf7-62b4c23f1aad}</Project>
+      <Name>Gacho.MvpVm.Core.Net20</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
