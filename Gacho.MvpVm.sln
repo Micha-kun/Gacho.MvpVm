@@ -39,6 +39,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{C825
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebForms.Net45.Sample", "samples\WebForms.Net45.Sample\WebForms.Net45.Sample.csproj", "{8C7F573F-6BA0-4249-BDC0-77DD665E4D73}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gacho.MvpVm.Core.Net20", "src\Gacho.MvpVm.Core.Net20\Gacho.MvpVm.Core.Net20.csproj", "{E37B910C-961B-405C-ACF7-62B4C23F1AAD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -81,6 +83,10 @@ Global
 		{8C7F573F-6BA0-4249-BDC0-77DD665E4D73}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8C7F573F-6BA0-4249-BDC0-77DD665E4D73}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8C7F573F-6BA0-4249-BDC0-77DD665E4D73}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E37B910C-961B-405C-ACF7-62B4C23F1AAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E37B910C-961B-405C-ACF7-62B4C23F1AAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E37B910C-961B-405C-ACF7-62B4C23F1AAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E37B910C-961B-405C-ACF7-62B4C23F1AAD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -95,5 +101,6 @@ Global
 		{99F34FB0-D7E4-4710-8210-C2FF61C2807F} = {03AA5BD6-4F90-4088-B4CA-14F3B9AB0B2C}
 		{36A3D752-F1DB-46FB-B687-F7DC5F6E85A6} = {03AA5BD6-4F90-4088-B4CA-14F3B9AB0B2C}
 		{8C7F573F-6BA0-4249-BDC0-77DD665E4D73} = {C82553F6-AB74-4529-AA80-2D6E1D94D6A3}
+		{E37B910C-961B-405C-ACF7-62B4C23F1AAD} = {5DC9445B-8CD0-4D1F-B6FF-AB54B57EAA22}
 	EndGlobalSection
 EndGlobal

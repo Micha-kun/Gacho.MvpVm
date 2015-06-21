@@ -2,11 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Text;
-using System.Web.UI;
 
-namespace Gacho.MvpVm.WebForms
+namespace Gacho.MvpVm.Core
 {
     public interface IView<TModel>
         where TModel : class, INotifyPropertyChanged
@@ -16,7 +14,7 @@ namespace Gacho.MvpVm.WebForms
         TModel Model { get; }
     }
 
-    public interface IView<TModel, TPresenter> : IView<TModel>, INamingContainer
+    public interface IView<TModel, TPresenter> : IView<TModel>
         where TModel : class, IViewModel
         where TPresenter : class, IPresenter<TModel>
     {

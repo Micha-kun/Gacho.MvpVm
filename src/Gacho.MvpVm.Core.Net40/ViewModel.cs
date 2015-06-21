@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+#if NET40
 using System.Linq;
 using System.Linq.Expressions;
+#endif
 using System.Reflection;
 using System.Text;
 
@@ -21,21 +23,11 @@ namespace Gacho.MvpVm.Core
             }
         }
 
+#if NET40
         protected void SetField<T>(ref T field, T value, Expression<Func<T>> propertyExpression)
         {
             var propertyName = this.ExtractPropertyName(propertyExpression);
             SetField<T>(ref field, value, propertyName);
-        }
-
-        protected void SetField<T>(ref T field, T value, string propertyName = "")
-        {
-            if (EqualityComparer<T>.Default.Equals(field, value))
-            {
-                return;
-            }
-
-            field = value;
-            this.OnPropertyChanged(propertyName);
         }
 
         private string ExtractPropertyName<T>(Expression<Func<T>> propertyExpresssion)
@@ -75,6 +67,17 @@ namespace Gacho.MvpVm.Core
             }
 
             return memberExpression.Member.Name;
+        }
+#endif
+        protected void SetField<T>(ref T field, T value, string propertyName = "")
+        {
+            if (EqualityComparer<T>.Default.Equals(field, value))
+            {
+                return;
+            }
+
+            field = value;
+            this.OnPropertyChanged(propertyName);
         }
     }
 }

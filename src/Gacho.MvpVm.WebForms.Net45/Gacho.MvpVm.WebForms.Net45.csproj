@@ -43,7 +43,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IView.cs" />
     <Compile Include="MasterPageView.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>

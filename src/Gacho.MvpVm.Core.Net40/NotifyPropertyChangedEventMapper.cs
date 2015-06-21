@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+#if NET40
 using System.Linq;
+#endif
 using System.Reflection;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Gacho.MvpVm.Core
 {
@@ -35,6 +36,7 @@ namespace Gacho.MvpVm.Core
             GC.SuppressFinalize(this);
         }
 
+#if NET40
         private void PrepareObserverPropertyHandlers()
         {
             var observerPropertyHandlerMethods = this.observer.GetType().GetMethods().Where(info => info.IsAttributedWith<PropertyChangedMethodAttribute>());
@@ -55,6 +57,30 @@ namespace Gacho.MvpVm.Core
                 }
             }
         }
+#elif NET20
+        private void PrepareObserverPropertyHandlers()
+        {
+            foreach (var method in this.observer.GetType().GetMethods())
+            {
+                if (AttributeUsageHelper.IsAttributedWith<PropertyChangedMethodAttribute>(method))
+                {
+                    foreach (var propertyChangedMethodAttribute in AttributeUsageHelper.FindAttributesOfType<PropertyChangedMethodAttribute>(method))
+                    {
+                        if (!this.trackedObserverPropertyMethodsDictionary.ContainsKey(propertyChangedMethodAttribute.PropertyName))
+                        {
+                            this.trackedObserverPropertyMethodsDictionary.Add(
+                                propertyChangedMethodAttribute.PropertyName,
+                                new List<MethodInfo> { method });
+                        }
+                        else
+                        {
+                            this.trackedObserverPropertyMethodsDictionary[propertyChangedMethodAttribute.PropertyName].Add(method);
+                        }
+                    }
+                }
+            }
+        }
+#endif
 
         private void HandlePropertyChanged(object sender, PropertyChangedEventArgs e)
         {

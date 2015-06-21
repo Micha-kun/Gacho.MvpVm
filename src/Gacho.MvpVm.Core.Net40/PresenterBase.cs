@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
+#if NET40
+using System.Linq;
 using System.Threading.Tasks;
+#endif
 
 namespace Gacho.MvpVm.Core
 {
+    internal delegate void ModelInitializer<TModel>(TModel model) where TModel : class, IViewModel;
     public abstract class Presenter<TModel> : IPresenter<TModel>
        where TModel : class, IViewModel
     {
@@ -31,10 +34,30 @@ namespace Gacho.MvpVm.Core
             }
         }
 
+#if NET40
         Task IPresenter<TModel>.InitializeAsync(TModel viewModel)
         {
             return this.InitializeAsync(viewModel);
         }
+#elif NET20
+
+        void IPresenter<TModel>.Initialize(TModel model)
+        {
+            Initialize(model);
+        }
+
+        protected abstract void Initialize(TModel model);
+
+        IAsyncResult IPresenter<TModel>.BeginInitialize(TModel model)
+        {
+            ModelInitializer<TModel> del = Initialize;
+            return del.BeginInvoke(model,null,null);
+        }
+
+        void IPresenter<TModel>.EndInitialize(IAsyncResult result)
+        {
+        }
+#endif
 
         public void Dispose()
         {
@@ -54,6 +77,8 @@ namespace Gacho.MvpVm.Core
             }
         }
 
+#if NET40
+
         protected virtual Task InitializeAsync(TModel viewModel)
         {
             if (viewModel == default(TModel))
@@ -67,5 +92,7 @@ namespace Gacho.MvpVm.Core
         }
 
         protected abstract Task Initialize();
+#endif
+
     }
 }

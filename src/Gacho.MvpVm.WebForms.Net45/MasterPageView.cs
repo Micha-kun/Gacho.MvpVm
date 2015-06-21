@@ -34,7 +34,7 @@ namespace Gacho.MvpVm.WebForms
         }
     }
 
-    public abstract class MasterPageView<TModel, TPresenter> : MasterPageView<TModel>, IView<TModel, TPresenter>
+    public abstract class MasterPageView<TModel, TPresenter> : MasterPageView<TModel>, IView<TModel, TPresenter>, INamingContainer
         where TModel : class, IViewModel, new()
         where TPresenter : class, IPresenter<TModel>
     {

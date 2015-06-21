@@ -4,21 +4,20 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{3E8BDEBD-C9C9-49E6-8254-C073F2DB858E}</ProjectGuid>
+    <ProjectGuid>{E37B910C-961B-405C-ACF7-62B4C23F1AAD}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Gacho.MvpVm.Core</RootNamespace>
-    <AssemblyName>Gacho.MvpVm.Core</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <RootNamespace>Gacho.MvpVm.Core.Net20</RootNamespace>
+    <AssemblyName>Gacho.MvpVm.Core.Net20</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;NET40</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;NET20</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -26,29 +25,41 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE;NET40</DefineConstants>
+    <DefineConstants>TRACE;NET20</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AttributeUsageHelper.cs" />
-    <Compile Include="IPresenter.cs" />
-    <Compile Include="IView.cs" />
-    <Compile Include="IViewModel.cs" />
-    <Compile Include="NotifyPropertyChangedEventMapper.cs" />
-    <Compile Include="PresenterBase.cs" />
+    <Compile Include="..\Gacho.MvpVm.Core.Net40\AttributeUsageHelper.cs">
+      <Link>AttributeUsageHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\Gacho.MvpVm.Core.Net40\IPresenter.cs">
+      <Link>IPresenter.cs</Link>
+    </Compile>
+    <Compile Include="..\Gacho.MvpVm.Core.Net40\IView.cs">
+      <Link>IView.cs</Link>
+    </Compile>
+    <Compile Include="..\Gacho.MvpVm.Core.Net40\IViewModel.cs">
+      <Link>IViewModel.cs</Link>
+    </Compile>
+    <Compile Include="..\Gacho.MvpVm.Core.Net40\NotifyPropertyChangedEventMapper.cs">
+      <Link>NotifyPropertyChangedEventMapper.cs</Link>
+    </Compile>
+    <Compile Include="..\Gacho.MvpVm.Core.Net40\PresenterBase.cs">
+      <Link>PresenterBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Gacho.MvpVm.Core.Net40\PropertyChangedMethodAttribute.cs">
+      <Link>PropertyChangedMethodAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\Gacho.MvpVm.Core.Net40\ViewModel.cs">
+      <Link>ViewModel.cs</Link>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PropertyChangedMethodAttribute.cs" />
-    <Compile Include="ViewModel.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
