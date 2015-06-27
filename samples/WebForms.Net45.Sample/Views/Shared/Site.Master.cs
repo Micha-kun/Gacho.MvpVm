@@ -2,7 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
+using System.Security.Principal;
 using System.Web;
+using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using WebForms.Net45.Sample.Presenters;
@@ -15,6 +18,11 @@ namespace WebForms.Net45.Sample.Views.Shared
         protected override SitePresenter BuildPresenter()
         {
             return new SitePresenter();
+        }
+
+        protected void Unnamed_LoggingOut(object sender, LoginCancelEventArgs e)
+        {
+            Context.GetOwinContext().Authentication.SignOut();
         }
     }
 }

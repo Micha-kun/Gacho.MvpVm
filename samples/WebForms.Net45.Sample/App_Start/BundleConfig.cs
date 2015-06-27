@@ -23,6 +23,8 @@ namespace WebForms.Net45.Sample
             bundles.Add(new ScriptBundle("~/bundles/modernizr-respond").Include(
                          "~/Scripts/modernizr-{version}.js", "~/Scripts/respond.js"));
 
+            bundles.Add(new StyleBundle("~/styles/site").Include("~/Content/Shared/Site.css"));
+
             // Code removed for clarity.
             BundleTable.EnableOptimizations = true;
         }

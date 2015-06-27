@@ -1,2 +1,0 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="SampleControlWithoutView.ascx.cs" Inherits="WebForms.Net45.Sample.Views.Home.SampleControlWithoutView" %>
-<p>Model cascade sample: <asp:Literal ID="Test" runat="server" /></p>
